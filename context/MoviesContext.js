@@ -77,15 +77,24 @@ export const MoviesProvider = ({ children }) => {
 
   const addMovie = async (movie) => {
     if (movies.some(m => m.id.toString() === movie.id.toString())) return false;
+    
+    // 確保日期欄位正確保存
+    const releaseDate = movie.release_date || movie.releaseDate || movie.first_air_date || movie.firstAirDate || null;
+    
     const newMovie = {
       ...movie,
       id: movie.id.toString(),
+      title: movie.title || movie.name, // 確保有標題
+      release_date: releaseDate, // 標準化欄位名稱
+      releaseDate: releaseDate, // 保留兩種格式以相容
       isWatched: false,
       userRating: 0,
       userReview: '',
       dateAdded: new Date().toISOString(),
       posterUrl: movie.posterUrl || (movie.poster_path ? `https://image.tmdb.org/t/p/w342${movie.poster_path}` : null)
     };
+    
+    console.log(`[MoviesContext] 加入電影: "${newMovie.title}", 上映日期: ${releaseDate}`);
     setMovies(prev => [newMovie, ...prev]);
     return true;
   };

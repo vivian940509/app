@@ -33,6 +33,16 @@ export default function SearchScreen({ navigation }) {
         data = await tmdbService.searchTVShows(query);
       }
       
+      console.log('[SearchScreen] 搜尋結果數量:', data.results?.length);
+      if (data.results && data.results.length > 0) {
+        console.log('[SearchScreen] 第一部電影資料:', {
+          title: data.results[0].title || data.results[0].name,
+          release_date: data.results[0].release_date,
+          releaseDate: data.results[0].releaseDate,
+          year: data.results[0].year
+        });
+      }
+      
       setResults(data.results || []);
     } catch (error) {
       console.error("搜尋出錯:", error);

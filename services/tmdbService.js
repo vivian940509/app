@@ -190,7 +190,8 @@ class TMDBService {
       title: movie.title,
       originalTitle: movie.original_title,
       overview: movie.overview,
-      releaseDate: movie.release_date,
+      releaseDate: movie.release_date, // 駝峰式
+      release_date: movie.release_date, // 底線式（保留相容性）
       posterPath: movie.poster_path,
       backdropPath: movie.backdrop_path,
       voteAverage: movie.vote_average,
@@ -216,7 +217,8 @@ class TMDBService {
       title: tv.name, // 為了相容性
       originalName: tv.original_name,
       overview: tv.overview,
-      firstAirDate: tv.first_air_date,
+      firstAirDate: tv.first_air_date, // 駝峰式
+      first_air_date: tv.first_air_date, // 底線式（保留相容性）
       posterPath: tv.poster_path,
       backdropPath: tv.backdrop_path,
       voteAverage: tv.vote_average,
